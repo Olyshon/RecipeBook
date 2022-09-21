@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">RecipeBook</string>
+    <string name="recipe_main_description">recipe_main_description</string>
+    <string name="title">Название рецепта</string>
+    <string name="description">Краткое описание рецепта</string>
+    <string name="ingredients">Ингредиенты</string>
+    <string name="remove">Удалить</string>
+    <string name="menu_edit">Редактировать</string>
+    <string name="description_post_save">Сохранить</string>
+    <string name="category_asian">Азиатская</string>
+    <string name="category_american">Американская</string>
+    <string name="category_eastern">Восточная</string>
+    <string name="category_european">Европейская</string>
+    <string name="category_panasian">Паназиатская</string>
+    <string name="category_russian">Русская</string>
+    <string name="category_mediterranean">Средиземноморская</string>
+    <string name="filterError">Выберите хотя бы одну категорию</string>
+    <string name="addRecipeError">Название, автор, ингредиенты и шаги должны быть указаны обязательно</string>
+    <string name="steps">Способ приготовления</string>
+    <string-array name="categoryArray">
+        <item>Азиатская</item>
+        <item>Американская</item>
+        <item>Восточная</item>
+        <item>Европейская</item>
+        <item>Паназиатская</item>
+        <item>Русская</item>
+        <item>Средиземноморская</item>
+    </string-array>
+</resources>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_main"
+    app:startDestination="@id/feedFragment">
+
+    <fragment
+        android:id="@+id/feedFragment"
+        android:name="ru.netology.recipebook.activity.FeedFragment"
+        android:label="fragment_feed"
+        tools:layout="@layout/fragment_feed" >
+        <action
+            android:id="@+id/action_feedFragment_to_newRecipeFragment"
+            app:destination="@id/newRecipeFragment" />
+        <action
+            android:id="@+id/action_feedFragment_to_oneRecipeFragment"
+            app:destination="@id/oneRecipeFragment" />
+        <action
+            android:id="@+id/action_feedFragment_to_filterFragment"
+            app:destination="@id/filterFragment" />
+        <action
+            android:id="@+id/action_feedFragment_to_favouritesFragment"
+            app:destination="@id/favouritesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/newRecipeFragment"
+        android:name="ru.netology.recipebook.activity.NewRecipeFragment"
+        android:label="fragment_new_recipe"
+        tools:layout="@layout/fragment_new_recipe" />
+    <fragment
+        android:id="@+id/oneRecipeFragment"
+        android:name="ru.netology.recipebook.activity.OneRecipeFragment"
+        android:label="fragment_one_recipe"
+        tools:layout="@layout/fragment_one_recipe" >
+        <action
+            android:id="@+id/action_oneRecipeFragment_to_newRecipeFragment"
+            app:destination="@id/newRecipeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/filterFragment"
+        android:name="ru.netology.recipebook.activity.FiltersFragment"
+        android:label="FilterFragment"
+        tools:layout="@layout/fragment_filter_sw"/>
+    <fragment
+        android:id="@+id/favouritesFragment"
+        android:name="ru.netology.recipebook.activity.FavouritesFragment"
+        android:label="fragment_favorites"
+        tools:layout="@layout/fragment_favorites" />
+
+</navigation>

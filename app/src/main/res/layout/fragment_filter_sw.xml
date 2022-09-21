@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_margin="16dp"
+    android:orientation="vertical"
+    tools:context=".activity.FiltersFragment">
+    <TextView
+        android:id="@+id/categoryLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:text="Какие категории рецептов показать:"
+        android:textColor="@color/purple_700"
+        android:textAppearance="?attr/textAppearanceHeadline6"
+
+       />
+
+    <com.google.android.material.switchmaterial.SwitchMaterial
+
+        android:id="@+id/switch_asian"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:checked="true"
+        android:text="@string/category_asian"/>
+
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/switch_american"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:text="@string/category_american"/>
+
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/switch_eastern"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:text="@string/category_eastern"/>
+
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/switch_european"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:text="@string/category_european"/>
+
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/switch_panasian"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:text="@string/category_panasian"/>
+
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/switch_russian"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:text="@string/category_russian"/>
+
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/switch_mediterranean"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:text="@string/category_mediterranean"/>
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/ok"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="2dp"
+        android:contentDescription="Подтвердить"
+        android:text="Подтвердить" />
+    />
+
+
+</LinearLayout>
