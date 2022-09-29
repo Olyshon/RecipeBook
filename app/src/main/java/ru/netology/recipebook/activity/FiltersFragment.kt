@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import ru.netology.recipebook.R
 import ru.netology.recipebook.activity.NewRecipeFragment.Companion.REQUEST_KEY
+import ru.netology.recipebook.adapter.RecipesAdapter
 import ru.netology.recipebook.databinding.FragmentFilterSwBinding
 import ru.netology.recipebook.databinding.FragmentNewRecipeBinding
 import ru.netology.recipebook.viewModel.RecipeViewModel
@@ -25,14 +26,9 @@ class FiltersFragment : Fragment() {
 
         val viewModel: RecipeViewModel by viewModels(ownerProducer = ::requireParentFragment)
 
-//        binding.switchAmerican.setOnCheckedChangeListener { buttonView, isChecked ->
-//            if (isChecked) {
-//                println("Standard Switch is on")
-//            } else {
-//                println("Standard Switch is off")
-//            }
-//        }
+        val adapter = RecipesAdapter(viewModel)
 
+        viewModel.clearCategories()
 
         binding.ok.setOnClickListener {
             with(binding) {
@@ -47,23 +43,42 @@ class FiltersFragment : Fragment() {
                     return@setOnClickListener
                 }
             }
-          var category = ""
-           if ( binding.switchPanasian.isChecked) {
-               category = binding.switchPanasian.text.toString()
+          var curCategory = ""
+           if ( binding.switchAmerican.isChecked) {
+               curCategory = binding.switchAmerican.text.toString()
+               viewModel.selectedCategories.add(curCategory)
            }
-
-            //viewModel.onFilterClicked(category)
-            setFragmentResult(REQUEST_KEY, Bundle())
+            if ( binding.switchAsian.isChecked) {
+                curCategory = binding.switchAsian.text.toString()
+                viewModel.selectedCategories.add(curCategory)
+            }
+            if ( binding.switchEastern.isChecked) {
+                curCategory = binding.switchEastern.text.toString()
+                viewModel.selectedCategories.add(curCategory)
+            }
+            if ( binding.switchEuropean.isChecked) {
+                curCategory = binding.switchEuropean.text.toString()
+                viewModel.selectedCategories.add(curCategory)
+            }
+            if ( binding.switchPanasian.isChecked) {
+                curCategory = binding.switchPanasian.text.toString()
+                viewModel.selectedCategories.add(curCategory)
+            }
+            if ( binding.switchRussian.isChecked) {
+                curCategory = binding.switchRussian.text.toString()
+                viewModel.selectedCategories.add(curCategory)
+            }
+            if ( binding.switchMediterranean.isChecked) {
+                curCategory = binding.switchMediterranean.text.toString()
+                viewModel.selectedCategories.add(curCategory)
+            }
+            println(viewModel.selectedCategories.toString())
+            viewModel.onFilterClicked(viewModel.selectedCategories)
+            adapter.submitList(viewModel.dataFiltered.value)
             findNavController().navigateUp()
         }
 
-
-
-
-
         return binding.root
     }
-    companion object {
-        const val REQUEST_KEY = "filterFragmentRequestKey"
-    }
+
 }

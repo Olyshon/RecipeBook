@@ -15,10 +15,6 @@
         app:cardBackgroundColor="#FFFFF1"
         app:strokeColor="@color/purple_200"
         app:strokeWidth="2dp">
-        <!--app:strokeColor="#BB99FC"-->
-
-        <!-- app:dragged_state="true"-->
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -33,12 +29,11 @@
                     android:id="@+id/mainPhoto"
                     android:layout_width="120dp"
                     android:layout_height="120dp"
-                    android:layout_margin="8dp"
+                    android:layout_margin="@dimen/margin_standart"
                     android:scaleType="centerCrop"
                     android:src="@drawable/no_photo"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/menu"
@@ -51,17 +46,19 @@
 
                 <TextView
                     android:id="@+id/title"
-                    android:layout_width="wrap_content"
+                    android:layout_width="224dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:gravity="center"
+                    android:layout_marginStart="@dimen/margin_standart"
+
                     android:text="@string/title"
-                    android:textColor="@color/purple_700"
-                    android:textAlignment="center"
+                    android:singleLine="false"
+
                     android:textAppearance="?attr/textAppearanceHeadline6"
-                    android:textSize="14sp"
+                    android:textColor="@color/purple_700"
+                    android:textSize="12sp"
                     app:layout_constraintStart_toEndOf="@id/mainPhoto"
-                    app:layout_constraintTop_toTopOf="@id/mainPhoto" />
+                    app:layout_constraintTop_toTopOf="@id/mainPhoto"
+                   />
 
                 <TextView
                     android:id="@+id/description"
@@ -73,7 +70,7 @@
                     android:textAlignment="viewStart"
                     android:textAppearance="?attr/textAppearanceBody2"
                     android:textColor="?android:attr/textColorSecondary"
-                    android:textSize="12sp"
+                    android:textSize="@dimen/text_size_mini"
                     app:layout_constraintStart_toStartOf="@id/title"
                     app:layout_constraintTop_toBottomOf="@id/title"
 
@@ -83,13 +80,13 @@
                     android:id="@+id/authorLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="@dimen/margin_standart"
                     android:elevation="2dp"
                     android:singleLine="true"
                     android:text="Автор:"
                     android:textAlignment="center"
                     android:textColor="@color/purple_700"
-                    android:textSize="12sp"
+                    android:textSize="@dimen/text_size_mini"
                     app:layout_constraintStart_toStartOf="@id/title"
                     app:layout_constraintTop_toBottomOf="@id/description"
                     tools:text="Автор:" />
@@ -98,15 +95,14 @@
                     android:id="@+id/author"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginStart="@dimen/margin_standart"
                     android:elevation="2dp"
                     android:singleLine="true"
                     android:textAlignment="center"
-                    android:textSize="12sp"
+                    android:textSize="@dimen/text_size_mini"
                     app:layout_constraintStart_toEndOf="@id/authorLabel"
                     app:layout_constraintTop_toTopOf="@id/authorLabel"
                     tools:text="имя автора" />
-
 
 
                 <com.google.android.material.chip.Chip
@@ -115,92 +111,52 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="2dp"
-                    android:textSize="10sp"
+                    android:checkable="false"
+                    android:textSize="@dimen/text_size_mini"
                     app:layout_constraintBottom_toBottomOf="@id/like"
                     app:layout_constraintStart_toStartOf="@id/title"
                     tools:text="категория" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/like"
+                    style="@style/Widget.AppTheme.LikeCheckbox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/Widget.AppTheme.LikeCheckbox"
 
                     android:checkable="true"
                     android:contentDescription="в избранное"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent" />
 
-
-                <!-- полная карточка рецепта -->
-                <TextView
-                    android:id="@+id/ingredientsLabel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:elevation="2dp"
-                    android:singleLine="true"
-                    android:text="@string/ingredients"
-                    android:textAlignment="center"
-                    android:textColor="@color/purple_700"
-                    android:textSize="12sp"
-                    app:layout_constraintStart_toStartOf="@id/mainPhoto"
-                    app:layout_constraintTop_toBottomOf="@id/chipCategory"
-                    tools:text="Ингредиенты"
-                    tools:visibility="visible" />
-
                 <TextView
                     android:id="@+id/ingredients"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:elevation="2dp"
-                    android:singleLine="false"
+                    android:singleLine="true"
                     android:textAlignment="center"
-                    android:textSize="12sp"
+                    android:textSize="8sp"
+                    android:visibility="invisible"
                     app:layout_constraintStart_toStartOf="@id/mainPhoto"
-                    app:layout_constraintTop_toBottomOf="@id/ingredientsLabel"
-                    tools:text="Ингредиенты блюда"
-                    tools:visibility="visible" />
+                    app:layout_constraintTop_toBottomOf="@id/mainPhoto"
 
-                <TextView
-                    android:id="@+id/stepsLabel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:elevation="2dp"
-                    android:paddingTop="4sp"
-                    android:singleLine="false"
-                    android:text="Способ приготовления"
-                    android:textAlignment="center"
-                    android:textColor="@color/purple_700"
-                    android:textSize="12sp"
-                    app:layout_constraintStart_toStartOf="@id/mainPhoto"
-                    app:layout_constraintTop_toBottomOf="@id/ingredients"
-                    tools:text="Способ приготовления"
+                    tools:text="Ингредиенты блюда"
                     tools:visibility="visible" />
 
                 <TextView
                     android:id="@+id/steps"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:elevation="2dp"
-                    android:singleLine="false"
-                    android:textAlignment="center"
-                    android:textSize="12sp"
-
+                    android:layout_marginStart="@dimen/margin_standart"
+                    android:singleLine="true"
+                    android:textSize="8sp"
+                    android:visibility="invisible"
                     app:layout_constraintStart_toStartOf="@id/mainPhoto"
-                    app:layout_constraintTop_toBottomOf="@id/stepsLabel"
+                    app:layout_constraintTop_toBottomOf="@id/mainPhoto"
                     tools:text="как готовить"
                     tools:visibility="visible" />
 
-                <androidx.constraintlayout.widget.Group
-                    android:id="@+id/groupFullCard"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    tools:visibility="invisible"
-                    app:constraint_referenced_ids="ingredients,ingredientsLabel,steps,stepsLabel" />
-
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-
 
         </LinearLayout>
 

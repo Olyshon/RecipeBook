@@ -2,7 +2,6 @@ package ru.netology.recipebook.adapter
 
 import android.net.Uri
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.PopupMenu
 import androidx.recyclerview.widget.DiffUtil
@@ -12,12 +11,12 @@ import ru.netology.recipebook.R
 import ru.netology.recipebook.databinding.RecipeCardviewBinding
 
 import ru.netology.recipebook.dto.Recipe
+import java.util.*
 
 
 internal class RecipesAdapter(
     private val interactionListener: RecipeInteractionListener
-) : ListAdapter<Recipe, RecipesAdapter.ViewHolder>(DiffCallback) {
-
+) : ListAdapter<Recipe, RecipesAdapter.ViewHolder>(DiffCallback), ItemTouchHelperAdapter {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -25,7 +24,6 @@ internal class RecipesAdapter(
             inflater, parent, false
         )
 
-        binding.groupFullCard.visibility = View.GONE
         return ViewHolder(binding, interactionListener)
     }
 
@@ -86,22 +84,27 @@ internal class RecipesAdapter(
                 author.text = recipe.author
                 ingredients.text = recipe.ingredients
                 steps.text = recipe.steps
-            //    groupFullCard.visibility = View.GONE
             }
         }
-
-
     }
 
 
     private object DiffCallback : DiffUtil.ItemCallback<Recipe>() {
-
         override fun areItemsTheSame(oldItem: Recipe, newItem: Recipe) =
             oldItem.id == newItem.id
 
         override fun areContentsTheSame(oldItem: Recipe, newItem: Recipe) =
             oldItem == newItem
+    }
 
+    override fun onItemMove(fromPosition: Int, toPosition: Int) {
+        val list = currentList.toMutableList()
+        Collections.swap(list, fromPosition, toPosition)
+        submitList(list)
+    }
+
+    override fun onItemDrop(fromPosition: Int, toPosition: Int) {
+        interactionListener.onMove(fromPosition, toPosition, currentList)
     }
 
 }

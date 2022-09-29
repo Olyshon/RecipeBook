@@ -18,9 +18,6 @@ interface RecipeDao {
     @Update
     fun update(recipe: RecipeEntity)
 
-    @Query("SELECT * FROM recipes WHERE liked ORDER BY id DESC")
-    fun getFavourites(): LiveData<List<RecipeEntity>>
-
     @Query("""
         UPDATE recipes SET
         liked = CASE WHEN liked THEN 0 ELSE 1 END
@@ -28,12 +25,17 @@ interface RecipeDao {
         """)
     fun likeById(id: Int)
 
-
     @Query("DELETE FROM recipes WHERE id = :id")
     fun removeById(id: Int)
 
-    @Query("SELECT * FROM recipes WHERE category = :category ORDER BY id DESC")
-    fun getFiltered(category: String): LiveData<List<RecipeEntity>>
+    @Query("SELECT * FROM recipes WHERE liked ORDER BY id DESC")
+    fun getFavourites(): LiveData<List<RecipeEntity>>
+
+    @Query("SELECT * FROM recipes WHERE category IN (:searchCategories) ORDER BY id DESC")
+    fun getFiltered(searchCategories: List<String?>): LiveData<List<RecipeEntity>>
+
+    @Query("SELECT * FROM recipes WHERE title LIKE :searchQuery ORDER BY id DESC")
+    fun searchTitle(searchQuery: String): List<Recipe>?
 
 
 
@@ -41,8 +43,5 @@ interface RecipeDao {
 
 
 
-
-//    @Query("SELECT * FROM recipes WHERE `like` = 1 ORDER BY id DESC")
-//    fun getAllFavorite(): LiveData<List<RecipeEntity>>
 
 }

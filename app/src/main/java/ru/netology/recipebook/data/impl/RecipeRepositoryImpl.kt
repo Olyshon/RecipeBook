@@ -36,9 +36,31 @@ class RecipeRepositoryImpl(
         }
     }
 
-    override fun getFiltered(category: String): LiveData<List<Recipe>> {
-        return dao.getFiltered(category).map { entities ->
+    override fun getFiltered(selectedCategories : MutableList<String>): LiveData<List<Recipe>> {
+        return dao.getFiltered(selectedCategories).map { entities ->
             entities.map { it.toModel() }
         }
+    }
+
+    override fun searchTitle(searchQuery: String): List<Recipe>? {
+        return dao.searchTitle(searchQuery)
+    }
+
+    override fun onMoveRecipe(fromPosition: Int, toPosition: Int, list: List<Recipe>) {
+//        if (fromPosition < toPosition) {
+//            val toOrder = list[toPosition].sorting
+//            for (index in toPosition downTo fromPosition + 1) {
+//                val recipe = list[index]
+//                save(recipe.copy(sorting = list[index - 1].sorting))
+//            }
+//            save(list[fromPosition].copy(sorting = toOrder))
+//        } else {
+//            val fromOrder = list[toPosition].sorting
+//            for (index in toPosition until fromPosition) {
+//                val recipe = list[index]
+//                save(recipe.copy(sorting = list[index + 1].sorting))
+//            }
+//            save(list[fromPosition].copy(sorting = fromOrder))
+//        }
     }
 }

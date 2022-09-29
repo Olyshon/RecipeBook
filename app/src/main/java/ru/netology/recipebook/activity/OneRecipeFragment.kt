@@ -24,25 +24,21 @@ class OneRecipeFragment : Fragment() {
     ): View {
         val viewModel: RecipeViewModel by viewModels(ownerProducer = ::requireParentFragment)
         val binding = FragmentOneRecipeBinding.inflate(inflater, container, false)
-        val viewHolder = RecipesAdapter.ViewHolder(binding.oneRecipeLayout, viewModel)
-
-
-
+        val viewHolder = RecipesAdapter.ViewHolder(binding.oneRecipeLayout, viewModel) ///
 
         val curId = arguments?.idArg
-
-
 
         viewModel.data.observe(viewLifecycleOwner) { recipes ->
             val recipe = recipes.find { it.id == curId } ?: run {
                 findNavController().navigateUp()
                 return@observe
             }
-          //  binding.
-           viewHolder.bind(recipe)
-            //     TODO("не показывает. дело в размере карточки?")
-            binding.oneRecipeLayout.groupFullCard.visibility = View.VISIBLE
-           // binding.oneRecipeLayout.ingredientsLabel.visibility = View.VISIBLE
+
+            viewHolder.bind(recipe)
+            binding.ingredientsLayOne.visibility = View.VISIBLE
+            binding.ingredientsLayOne.text = recipe.ingredients
+            binding.stepsLayOne.visibility = View.VISIBLE
+            binding.stepsLayOne.text = recipe.steps
 
         }
 
@@ -51,16 +47,12 @@ class OneRecipeFragment : Fragment() {
                 R.id.action_oneRecipeFragment_to_newRecipeFragment,
                 Bundle().apply { idArg = recipeId })
         }
-
-
         return binding.root
-
     }
 
     companion object {
         var Bundle.textArg: String? by StringArg
         var Bundle.idArg: Int? by IntArg
     }
-
 
 }

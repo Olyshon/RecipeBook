@@ -6,9 +6,8 @@ data class Recipe (
     val description: String,
     val category: String,
     val author: String,
-    val ingredients: String, // возможно переделать в массив
-    val steps: String, //потом надо сделать списком с возможной картинкой
+    val ingredients: String,
+    val steps: String,
     val liked: Boolean = false,
     val mainPhoto: String?
-
 )

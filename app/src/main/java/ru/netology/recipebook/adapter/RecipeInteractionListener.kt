@@ -9,7 +9,10 @@ interface RecipeInteractionListener {
     fun onEditClicked(recipe: Recipe)
     fun cancelEditing()
     fun onRecipeClicked(recipe: Recipe)
-    fun onFilterClicked(category: String)
+    fun onFilterClicked(selectedCategories : MutableList<String>)
     fun onFavouriteClicked()
+    fun clearCategories()
+    fun onSearchClicked(query: String)
+    fun onMove(fromPosition: Int, toPosition: Int, list: List<Recipe>)
 
 }

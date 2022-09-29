@@ -32,11 +32,6 @@ class NewRecipeFragment : Fragment() {
         "Русская",
         "Средиземноморская"
     )
-//    override fun onResume() {
-//        super.onResume()
-//        (requireActivity() as? AppActivity)?.showBottomNav()
-//    }
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -70,14 +65,10 @@ class NewRecipeFragment : Fragment() {
                     editIngridients.setText(recipe.ingredients)
                     editSteps.setText(recipe.steps)
                     editAuthor.setText(recipe.author)
-
-
                 }
             }
         }
         binding.editTitle.requestFocus()
-
-
 
         val image = registerForActivityResult(ActivityResultContracts.OpenDocument()) {
             requireActivity().contentResolver.takePersistableUriPermission(
@@ -136,13 +127,11 @@ class NewRecipeFragment : Fragment() {
         super.onDestroy()
     }
 
-
     private fun numberCategory(str: String): Int {
         for (i in categoryArray.indices)
             if (str == categoryArray[i]) return i
-        return 100000   // TODO "некрасивый выход, надо исправить бы"
+        return -1
     }
-
 
     companion object {
         const val REQUEST_KEY = "requestKey"

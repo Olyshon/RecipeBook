@@ -1,12 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     tools:context=".activity.OneRecipeFragment">
-<include
-    android:id="@+id/oneRecipeLayout"
-    layout="@layout/recipe_cardview"
-    />
 
-</ScrollView>
+    <include
+        android:id="@+id/oneRecipeLayout"
+        layout="@layout/recipe_cardview" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_ingredients"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_mini"
+        android:clickable="true"
+        android:focusable="true"
+        app:cardBackgroundColor="#FFFFF1"
+        app:strokeColor="@color/purple_200"
+        app:strokeWidth="@dimen/margin_mini">
+
+        <LinearLayout
+            android:id="@+id/myLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_margin="8dp">
+
+            <TextView
+                android:id="@+id/ingredientsLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:elevation="@dimen/margin_mini"
+                android:singleLine="true"
+                android:text="@string/ingredients"
+                android:textAlignment="center"
+                android:textColor="@color/purple_700"
+                android:textSize="@dimen/text_size_mini"
+                android:textStyle="bold"
+                tools:text="Ингредиенты"
+                tools:visibility="visible" />
+
+            <TextView
+                android:id="@+id/ingredientsLayOne"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:elevation="2dp"
+                android:singleLine="false"
+                android:textSize="@dimen/text_size_mini"
+
+                tools:text="Ингредиенты блюда"
+                tools:visibility="visible" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_steps"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_mini"
+        android:clickable="true"
+        android:focusable="true"
+        app:cardBackgroundColor="#FFFFF1"
+        app:strokeColor="@color/purple_200"
+        app:strokeWidth="2dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_margin="8dp"
+            >
+
+            <TextView
+                android:id="@+id/stepsLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:elevation="2dp"
+                android:singleLine="false"
+                android:text="Способ приготовления"
+                android:textAlignment="center"
+                android:textColor="@color/purple_700"
+                android:textSize="@dimen/text_size_mini"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/mainPhoto"
+                app:layout_constraintTop_toBottomOf="@id/ingredients"
+                tools:text="Способ приготовления"
+                tools:visibility="visible" />
+
+            <TextView
+                android:id="@+id/stepsLayOne"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:elevation="2dp"
+                android:singleLine="false"
+                android:textSize="@dimen/text_size_mini"
+
+                app:layout_constraintStart_toStartOf="@id/mainPhoto"
+                app:layout_constraintTop_toBottomOf="@id/stepsLabel"
+                tools:text="как готовить"
+                tools:visibility="visible" />
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+
+</LinearLayout>
+

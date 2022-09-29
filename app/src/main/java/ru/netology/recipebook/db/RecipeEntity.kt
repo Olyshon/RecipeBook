@@ -4,8 +4,8 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "recipes") //лучше явно прописывать названия таблиц и полей
-class RecipeEntity (
+@Entity(tableName = "recipes")
+class RecipeEntity(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     val id: Int,
@@ -20,7 +20,7 @@ class RecipeEntity (
     @ColumnInfo(name = "ingredients")
     val ingredients: String,
     @ColumnInfo(name = "steps")
-    val steps: String, //потом надо сделать в виде объекта json с возможной картинкой
+    val steps: String,
     @ColumnInfo(name = "liked")
     val liked: Boolean = false,
     @ColumnInfo(name = "mainPhoto")

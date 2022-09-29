@@ -17,6 +17,9 @@
     <string name="filterError">Выберите хотя бы одну категорию</string>
     <string name="addRecipeError">Название, автор, ингредиенты и шаги должны быть указаны обязательно</string>
     <string name="steps">Способ приготовления</string>
+    <string name="searchError">Введите название для поиска</string>
+    <string name="allRecepies">Все рецепты</string>
+    <string name="Favorite">Избранное</string>
     <string-array name="categoryArray">
         <item>Азиатская</item>
         <item>Американская</item>

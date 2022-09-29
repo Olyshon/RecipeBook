@@ -3,4 +3,7 @@
     <dimen name="common_spacing">16dp</dimen>
     <dimen name="recipe_main_size">192dp</dimen>
     <dimen name="icon_button_min_size">48dp</dimen>
+    <dimen name="margin_standart">8dp</dimen>
+    <dimen name="margin_mini">2dp</dimen>
+    <dimen name="text_size_mini">12sp</dimen>
 </resources>

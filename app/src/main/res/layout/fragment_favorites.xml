@@ -14,22 +14,24 @@
         android:scaleType="centerCrop"
         android:visibility="gone"/>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recipesRecyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-
-        tools:listitem="@layout/recipe_cardview"
-        tools:ignore="MissingConstraints" />
     <com.google.android.material.chip.Chip
-        android:id="@+id/filterAmerican"
+        android:id="@+id/favoritesLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20sp"
-        app:layout_constraintTop_toTopOf="@id/recipesRecyclerView"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="@id/recipesRecyclerView"
         style="@style/Widget.MaterialComponents.Chip.Choice"
         android:checked = "true"
-        android:text = "Избранное" />
+        android:text = "Избранные рецепты" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recipesRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintTop_toBottomOf="@id/favoritesLabel"
+        tools:listitem="@layout/recipe_cardview"
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

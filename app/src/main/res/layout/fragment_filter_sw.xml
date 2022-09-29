@@ -76,6 +76,4 @@
         android:contentDescription="Подтвердить"
         android:text="Подтвердить" />
     />
-
-
 </LinearLayout>

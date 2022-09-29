@@ -3,12 +3,12 @@
     <item
         android:id="@+id/favouritesFragment"
         android:icon="@drawable/ic_liked24"
-        android:title="Избранное" />
+        android:title="@string/Favorite" />
 
     <item
         android:id="@+id/feedFragment"
         android:icon="@drawable/ic_list_24"
-        android:title="Все рецепты" />
+        android:title="@string/allRecepies" />
 
 
 </menu>

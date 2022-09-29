@@ -3,6 +3,7 @@ package ru.netology.recipebook.viewModel
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 
 import ru.netology.recipebook.adapter.RecipeInteractionListener
 import ru.netology.recipebook.data.RecipeRepository
@@ -28,9 +29,12 @@ class RecipeViewModel(
 
     val editEvent = SingleLiveEvent<Int?>()
     val oneRecipeEvent = SingleLiveEvent<Recipe>()
-    val addRecipeEvent = SingleLiveEvent<Int?>()
 
     private val currentRecipe = MutableLiveData<Recipe?>(null)
+    var selectedCategories = mutableListOf<String>()
+
+    val dataFavorites = repository.getFavourites()
+    var dataFiltered = Transformations.distinctUntilChanged(data) as MutableLiveData<List<Recipe>>
 
     fun onAddButtonClicked(updateRecipe: Recipe) {
 
@@ -42,7 +46,7 @@ class RecipeViewModel(
             ingredients = updateRecipe.ingredients,
             steps = updateRecipe.steps,
             liked = updateRecipe.liked,
-            mainPhoto =  updateRecipe.mainPhoto
+            mainPhoto = updateRecipe.mainPhoto
 
         ) ?: Recipe(
             id = NEW_RECIPE_ID,
@@ -53,7 +57,7 @@ class RecipeViewModel(
             ingredients = updateRecipe.ingredients,
             steps = updateRecipe.steps,
             liked = updateRecipe.liked,
-            mainPhoto =   updateRecipe.mainPhoto
+            mainPhoto = updateRecipe.mainPhoto
         )
         repository.save(recipe)
         currentRecipe.value = null
@@ -76,20 +80,30 @@ class RecipeViewModel(
         return
     }
 
+    override fun clearCategories() {
+        selectedCategories.clear()
+        return
+    }
+
     override fun onRecipeClicked(recipe: Recipe) {
         currentRecipe.value = recipe
         oneRecipeEvent.value = recipe
     }
 
-    override fun onFilterClicked(category: String) {
-        repository.getFiltered(category)
-        println("вызываю фильтрацию")
+    override fun onFilterClicked(selectedCategories: MutableList<String>) {
+        dataFiltered = repository.getFiltered(selectedCategories) as MutableLiveData<List<Recipe>>
+    }
+
+    override fun onSearchClicked(query: String) {
+        dataFiltered.value = repository.searchTitle("%$query%")
+
     }
 
     override fun onFavouriteClicked() {
-        println("вызываю избранное")
         repository.getFavourites()
     }
 
-
+    override fun onMove(fromPosition: Int, toPosition: Int, list: List<Recipe>) {
+        repository.onMoveRecipe(fromPosition, toPosition, list)
+    }
 }

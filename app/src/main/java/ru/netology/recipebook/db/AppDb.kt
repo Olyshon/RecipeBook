@@ -25,7 +25,7 @@ abstract class AppDb : RoomDatabase() {
         private fun buildDatabase(context: Context) =
             Room.databaseBuilder(
                 context, AppDb::class.java, "recipe.db"
-            ).allowMainThreadQueries()  // не стоит включать базу и выполнять запросы в основном потоке, но сейчас так
+            ).allowMainThreadQueries()
                 .build()
     }
 }

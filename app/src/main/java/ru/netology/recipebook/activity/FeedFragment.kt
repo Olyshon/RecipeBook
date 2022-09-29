@@ -1,18 +1,26 @@
 package ru.netology.recipebook.activity
 
-import android.net.Uri
+import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.view.inputmethod.InputMethodManager
+import android.widget.SearchView
+import android.widget.Toast
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.ItemTouchHelper
 import ru.netology.recipebook.R
+import ru.netology.recipebook.util.hideKeyboard
 import ru.netology.recipebook.activity.OneRecipeFragment.Companion.idArg
 import ru.netology.recipebook.adapter.RecipesAdapter
+import ru.netology.recipebook.adapter.SimpleItemTouchHelperCallback
 import ru.netology.recipebook.databinding.FragmentFeedBinding
 import ru.netology.recipebook.viewModel.RecipeViewModel
+
 
 class FeedFragment : Fragment() {
 
@@ -25,82 +33,78 @@ class FeedFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val binding = FragmentFeedBinding.inflate(inflater, container, false)
-        //   val viewModel: RecipeViewModel by viewModels(ownerProducer = ::requireParentFragment)
 
         val adapter = RecipesAdapter(viewModel)
         binding.recipesRecyclerView.adapter = adapter
-        viewModel.cancelEditing()
-        viewModel.data.observe(viewLifecycleOwner) { recipes ->
-            adapter.submitList(recipes)
+        viewModel.data.observe(viewLifecycleOwner) {
+            if (it.isEmpty()) {
+                with(binding) {
+                    recipesRecyclerView.visibility = View.GONE
+                    noContent.visibility = View.VISIBLE
+                }
+            } else
+                with(binding) {
+                    recipesRecyclerView.visibility = View.VISIBLE
+                    noContent.visibility = View.GONE
+                    adapter.submitList(it)
+                }
         }
+
+        viewModel.dataFiltered.observe(viewLifecycleOwner) {
+            if (it.isEmpty()) {
+                with(binding) {
+                    recipesRecyclerView.visibility = View.GONE
+                    noContent.visibility = View.VISIBLE
+                }
+            } else
+                with(binding) {
+                    recipesRecyclerView.visibility = View.VISIBLE
+                    noContent.visibility = View.GONE
+                    adapter.submitList(it)
+                    viewModel.clearCategories()
+                }
+        }
+
+        val callback: ItemTouchHelper.Callback = SimpleItemTouchHelperCallback(adapter)
+        val touchHelper = ItemTouchHelper(callback)
+        touchHelper.attachToRecyclerView(binding.recipesRecyclerView)
+
+        viewModel.cancelEditing()
 
         binding.addButton.setOnClickListener {
             findNavController().navigate(R.id.action_feedFragment_to_newRecipeFragment)
         }
 
-        binding.filterButton.setOnClickListener {
-          //  отобразить фильтрованный список через запрос к бд? может через синглайфивент и обсерв??
-
-            findNavController().navigate(R.id.action_feedFragment_to_filterFragment)
-            //TODO" вернуть обратно список категорий для отображения и запустить?
-        //  viewModel.data = viewModel.onFavouriteClicked()
-            ////            viewModel.data.observe(viewLifecycleOwner) { recipes ->
-            ////                adapter.submitList(recipes)
-            ////            }"
+        binding.searchButton.setOnClickListener {
+            val query = binding.editSearch.text.toString()
+            if (query.isBlank()) {
+                adapter.submitList(viewModel.data.value)
+            } else {
+                viewModel.onSearchClicked(query)
+                adapter.submitList(viewModel.dataFiltered.value)
+            }
         }
 
+        binding.filterButton.setOnClickListener {
+            findNavController().navigate(R.id.action_feedFragment_to_filterFragment)
+        }
 
         viewModel.editEvent.observe(viewLifecycleOwner) { recipeId ->
             findNavController().navigate(
                 R.id.action_feedFragment_to_newRecipeFragment,
                 Bundle().apply { idArg = recipeId })
-
         }
 
-        viewModel.oneRecipeEvent.observe(viewLifecycleOwner) { recipe -> // можно привести к одному виду с эдит ивент если заработает
+        viewModel.oneRecipeEvent.observe(viewLifecycleOwner) { recipe ->
             findNavController().navigate(
                 R.id.action_feedFragment_to_oneRecipeFragment,
                 Bundle().apply { idArg = recipe.id })
         }
 
-
-
-
-
         return binding.root
     }
 
-    /*  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-          // The usage of an interface lets you inject your own implementation
-          val menuHost: MenuHost = requireActivity()
 
-          // Add menu items without using the Fragment Menu APIs
-          // Note how we can tie the MenuProvider to the viewLifecycleOwner
-          // and an optional Lifecycle.State (here, RESUMED) to indicate when
-          // the menu should be visible
-          menuHost.addMenuProvider(object : MenuProvider {
-              override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-                  // Add menu items here
-                  menuInflater.inflate(R.menu.menu_bottom_nav, menu)
-              }
-
-              override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-                  // Handle the menu selection
-                  return when (menuItem.itemId) {
-  //                    R.id.menu_clear -> {
-  //                        // clearCompletedTasks()
-  //                        true
-  //                    }
-  //                    R.id.menu_refresh -> {
-  //                        // loadTasks(true)
-  //                        true
-  //                    }
-                      else -> false
-                  }
-              }
-          }, viewLifecycleOwner, Lifecycle.State.RESUMED)
-      }
-  */
 }
 
 
